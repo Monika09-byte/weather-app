@@ -30,3 +30,19 @@ button{
 .result{
     margin-top: 20px;
 }
+
+.sunny{
+    background: #fff7d6;
+}
+
+.cloudy{
+    background: #e8e8e8;
+}
+
+.rainy{
+    background: #d6e6ff;
+}
+
+.stormy{
+    background:#cfc5ff
+}
