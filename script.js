@@ -2,7 +2,7 @@ const cityInput = document.getElementById("cityInput");
 const searchBtn = document.getElementById("searchBtn");
 const result = document.getElementById("result");
 const app = document.getElementById("app");
-
+const locationBtn = document.getElementById("locationBtn");
 // 1) Convert city name -> latitude & longitude
 async function getCoordinates(city) {
   const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`;
@@ -86,4 +86,25 @@ cityInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     searchBtn.click();
   }
+});
+
+locationBtn.addEventListener("click",()=>{
+    if(!navigator.geolocation){
+        result.innerHTML="<p>Geolocation is not supported in your browser </p>";
+        return;
+    }
+
+    result.innerHTML="<p>Detecting your location...</p>";
+    navigator.geolocation.getCurrentPosition(
+        (position)=>{
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            getWeather(lat,lon,"Your location:", "");
+        },
+        ()=>
+        {
+            result.innerHTML="<p>Location access denied</p>"
+        }
+    );
 });
